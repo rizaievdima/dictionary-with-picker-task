@@ -14,9 +14,15 @@ function WordCard({ wordInfo, setNext }) {
   return (
     <View style={styles.container}>
       <Pressable
-        style={styles.wordContainer}
+        style={[
+          styles.wordContainer,
+          wordInfo.image && styles.wordContainerWithImage,
+        ]}
         onPress={() => setShowFullInfo(true)}
       >
+        {wordInfo.image && (
+          <Image style={styles.image} source={{ uri: wordInfo.image }} />
+        )}
         <Text style={styles.word}>{wordInfo.word}</Text>
         {showFullInfo && (
           <>
@@ -88,6 +94,9 @@ function getStyles(colors) {
       paddingVertical: 140,
       justifyContent: "space-evenly",
     },
+    wordContainerWithImage: {
+      paddingVertical: 40,
+    },
     word: {
       fontSize: 28,
       color: colors.fontMain,
@@ -126,7 +135,7 @@ function getStyles(colors) {
     image: {
       width: 150,
       aspectRatio: 1,
-      // marginBottom: 30,
+      borderRadius: 8,
     },
   });
 }
